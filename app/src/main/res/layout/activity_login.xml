@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/primary_background">
+
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="70dp"
+        android:text="Welcome"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="55dp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/tvWelcome"
+        android:layout_marginTop="80dp"
+        android:hint="Email"
+        android:textAlignment="center"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/text_border"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_marginTop="8dp"
+        android:hint="Password"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:background="@drawable/text_border"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
+
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPassword"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_border"
+        android:padding="16dp"
+        android:gravity="center" />
+
+
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="don't have an account? Register here"
+        android:background="@color/cardview_dark_background"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
