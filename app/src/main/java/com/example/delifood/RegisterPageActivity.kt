@@ -19,6 +19,7 @@ class RegisterPageActivity : AppCompatActivity() {
     var imgProfile: ImageView? = null
     var btnUploadProfile: ImageButton? = null
     var btnRegister: Button? = null
+    var btnCancel: Button? = null
 
 
 
@@ -39,6 +40,7 @@ class RegisterPageActivity : AppCompatActivity() {
         btnRegister = findViewById<Button>(R.id.btnRegister)
         btnUploadProfile = findViewById<ImageButton>(R.id.btnUploadProfile)
         tvAppName = findViewById<TextView>(R.id.tvAppName)
+        btnCancel = findViewById<Button>(R.id.btnCancel)
 
         //register button
         btnRegister?.setOnClickListener {
@@ -47,6 +49,9 @@ class RegisterPageActivity : AppCompatActivity() {
             val registerPassword = etRegisterPassword?.text.toString()
             val registerImgProfile = imgProfile?.toString()
 
+        }
+        btnCancel?.setOnClickListener(){
+            finish()
         }
     }
 }
