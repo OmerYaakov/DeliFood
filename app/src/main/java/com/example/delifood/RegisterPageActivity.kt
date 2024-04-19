@@ -1,5 +1,6 @@
 package com.example.delifood
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -48,7 +49,8 @@ class RegisterPageActivity : AppCompatActivity() {
             val registerEmail = etRegisterEmail?.text.toString()
             val registerPassword = etRegisterPassword?.text.toString()
             val registerImgProfile = imgProfile?.toString()
-
+            val intent = Intent(this, PostRecyclerViewActivity::class.java)
+            startActivity(intent)
         }
         btnCancel?.setOnClickListener(){
             finish()

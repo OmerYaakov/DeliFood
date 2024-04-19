@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onLoginButtonClick (view: View) {
-        val intent = Intent(this, HomePageActivity::class.java)
+        val intent = Intent(this, PostRecyclerViewActivity::class.java)
         startActivity(intent)
     }
     fun onRegisterButtonClick (view: View) {
