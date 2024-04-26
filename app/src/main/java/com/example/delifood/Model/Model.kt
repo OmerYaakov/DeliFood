@@ -1,5 +1,6 @@
 package com.example.delifood.Model
 
+import android.util.Log
 import java.util.Date
 
 class Model private constructor(){
@@ -19,11 +20,12 @@ class Model private constructor(){
                 "PostID: $i",
                 "Post Image: $i",
                 "Post Title: $i",
-                "Post Description: $i hi ma kore korim li omer ! ",
+                "Post Description: $i hi ma kore korim li omer dfgdfgdfg dfg dfg dfgdfg dfg dfgdfgdfg dfgdf dfg dfg dfgd fg  ! ",
                 "Post Publisher: $i",
                 Date()
             )
             posts.add(post)
+            Log.d("Model", "Post added: $i")
         }
     }
 

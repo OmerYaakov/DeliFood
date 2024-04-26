@@ -13,17 +13,17 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.btnLogin)
         val registerButton = findViewById<Button>(R.id.btnRegister)
         loginButton.setOnClickListener(::onLoginButtonClick)
-        registerButton.setOnClickListener(::onRegisterButtonClick)
+        //registerButton.setOnClickListener(::onRegisterButtonClick)
     }
 
-    fun onLoginButtonClick (view: View) {
-        val intent = Intent(this, PostRecyclerViewActivity::class.java)
+    private fun onLoginButtonClick (view: View) {
+        val intent = Intent(this, PostRecyclerViewFragment::class.java)
         startActivity(intent)
     }
-    fun onRegisterButtonClick (view: View) {
-        val intent = Intent(this, RegisterPageActivity::class.java)
-        startActivity(intent)
-    }
+//    private fun onRegisterButtonClick (view: View) {
+//        val intent = Intent(this, RegisterPageActivity::class.java)
+//        startActivity(intent)
+//    }
 }
 
 
