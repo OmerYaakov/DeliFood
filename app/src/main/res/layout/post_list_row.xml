@@ -50,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:textSize="10sp"
         android:text="PUBLISHER"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPostRow" />
 
@@ -67,6 +67,17 @@
         app:layout_constraintStart_toEndOf="@+id/tvPublisherRow"
         app:layout_constraintTop_toBottomOf="@+id/ivPostRow" />
 
+<!--    <Button-->
+<!--        android:id="@+id/btnPostRow"-->
+<!--        android:layout_width="415dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:text="hello"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tvPostRowDescription" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
