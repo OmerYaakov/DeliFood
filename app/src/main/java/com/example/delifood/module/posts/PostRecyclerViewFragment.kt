@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,10 @@ import com.example.delifood.Model.Post
 
 class PostRecyclerViewFragment : Fragment() {
     private var posts: MutableList<Post>? = null
+    private var homeNavBtn: Button? = MainActivity.homeNavBtn
+    private var profileNavBtn: Button? = MainActivity.profileNavBtn
+    private var addPostNavBtn: Button? = MainActivity.addPostNavBtn
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_post_recycler_view, container, false)
@@ -21,6 +26,9 @@ class PostRecyclerViewFragment : Fragment() {
         postRecyclerView.setHasFixedSize(true)
         postRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         postRecyclerView.adapter = PostRecyclerViewAdapter(posts)
+        addPostNavBtn?.visibility = View.VISIBLE
+        profileNavBtn?.visibility = View.VISIBLE
+        homeNavBtn?.visibility = View.VISIBLE
 
         return view
     }

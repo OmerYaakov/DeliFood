@@ -14,7 +14,7 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var postDescription: TextView = itemView.findViewById(R.id.tvPostRowDescription)
     private var postPublisher: TextView = itemView.findViewById(R.id.tvPublisherRow)
     private var postImage: ImageView = itemView.findViewById(R.id.ivPostRow)
-//    private var btnPostRow: Button = itemView.findViewById(R.id.btnPostRow)
+
 
     fun bind(post: Post?) {
         postTitle.text = post?.postTitle
@@ -22,6 +22,7 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         postDescription.text = post?.postDescription
         postPublisher.text = post?.postPublisher
         postImage.setImageResource(R.drawable.avatar_profile)
+
     }
 
 
