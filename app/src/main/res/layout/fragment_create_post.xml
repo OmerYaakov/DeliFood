@@ -34,13 +34,14 @@
         android:id="@+id/select_photo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button_border"
-        android:text="Select Photo"
+        android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:clickable="true"
-        android:layout_marginTop="8dp"/>
+        android:text="Select Photo"
+        android:textColor="@color/white" />
 
 
     <ImageView
@@ -55,11 +56,12 @@
         android:id="@+id/submit_post_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
-        android:text="Submit Post"
-        android:focusable="true"
         android:clickable="true"
-        android:layout_marginTop="20dp"/>
+        android:focusable="true"
+        android:text="Submit Post"
+        android:textColor="@color/white" />
 
 </LinearLayout>
