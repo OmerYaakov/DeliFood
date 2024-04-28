@@ -75,7 +75,7 @@
         android:layout_marginTop="10dp"
         android:hint="Password"
         android:textAlignment="center"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:layout_below="@id/etRegisterEmail"
         android:background="@drawable/text_border"
         android:textColorHint="@color/white"
