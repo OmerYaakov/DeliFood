@@ -1,6 +1,11 @@
 package com.example.delifood.module.register
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +20,7 @@ import com.example.delifood.R
 
 class RegisterFormFragment : Fragment() {
 
-    // Reference to EditText fields
+
     private var tvAppName: TextView? = null
     private var etRegisterUsername: EditText? = null
     private var etRegisterEmail: EditText? = null
@@ -24,6 +29,10 @@ class RegisterFormFragment : Fragment() {
     private var btnUploadProfile: ImageButton? = null
     private var btnRegister: Button? = null
     private var btnCancel: Button? = null
+
+
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_IMAGE_GALLERY = 2
 
     companion object {
         fun newInstance(): RegisterFormFragment {
@@ -41,7 +50,7 @@ class RegisterFormFragment : Fragment() {
     }
 
     private fun setupUI(view: View) {
-        // Reference to EditText fields
+
         tvAppName = view.findViewById(R.id.tvAppName)
         etRegisterUsername = view.findViewById(R.id.etRegisterUsername)
         etRegisterEmail = view.findViewById(R.id.etRegisterEmail)
@@ -51,8 +60,13 @@ class RegisterFormFragment : Fragment() {
         btnUploadProfile = view.findViewById(R.id.btnUploadProfile)
         btnCancel = view.findViewById(R.id.btnCancel)
 
-        // Register button click listener
+
+        btnUploadProfile?.setOnClickListener {
+            selectImage()
+        }
+
         btnRegister?.setOnClickListener {
+
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
             val homeFragment = PostRecyclerViewFragment()
@@ -61,11 +75,55 @@ class RegisterFormFragment : Fragment() {
             transaction.commit()
         }
 
-        // Cancel button click listener
         btnCancel?.setOnClickListener {
-            // Handle cancel button click here
-            // Example: pop back stack to return to previous fragment
+
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
+
+    private fun selectImage() {
+        val options = arrayOf(
+        "Take Photo", "Choose from Gallery", "Cancel")
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Choose your profile picture")
+
+        builder.setItems(options) { dialog, which ->
+            when (options[which]) {
+                "Take Photo" -> dispatchTakePictureIntent()
+                "Choose from Gallery" -> openGallery()
+                "Cancel" -> dialog.dismiss()
+            }
+        }
+
+        builder.show()
+    }
+
+    private fun dispatchTakePictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_IMAGE_CAPTURE -> {
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    imgProfile?.setImageBitmap(imageBitmap)
+                }
+                REQUEST_IMAGE_GALLERY -> {
+                    val imageUri = data?.data
+                    imgProfile?.setImageURI(imageUri)
+                }
+            }
+        }
+    }
 }
+
