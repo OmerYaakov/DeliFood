@@ -5,74 +5,77 @@
     android:layout_height="match_parent"
     android:background="@color/primary_background">
 
-    <EditText
-        android:id="@+id/post_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/white"
-        android:hint="Post Title"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:inputType="text"
-        android:autofillHints="name" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/post_content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/white"
-        android:hint="Post Description"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/select_photo_button"
-        app:layout_constraintEnd_toEndOf="@+id/post_title"
-        app:layout_constraintStart_toStartOf="@+id/post_title"
-        app:layout_constraintTop_toBottomOf="@+id/post_title"
-        android:autofillHints="name"
-        android:inputType="text" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/select_photo_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/button_border"
-        android:text="Select Photo"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/photo_preview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_content" />
+            <EditText
+                android:id="@+id/post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="name"
+                android:backgroundTint="@color/white"
+                android:hint="Post Title"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
-    <ImageView
-        android:id="@+id/photo_preview"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="@+id/post_content"
-        app:layout_constraintStart_toStartOf="@+id/post_content"
-        app:layout_constraintTop_toBottomOf="@+id/select_photo_button" />
+            <EditText
+                android:id="@+id/post_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="name"
+                android:backgroundTint="@color/white"
+                android:hint="Post Description"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
-    <Button
-        android:id="@+id/submit_post_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/button_border"
-        android:text="Submit Post"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/photo_preview"
-        app:layout_constraintStart_toStartOf="@+id/photo_preview"
-        app:layout_constraintTop_toBottomOf="@+id/photo_preview" />
+            <Button
+                android:id="@+id/select_photo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_border"
+                android:text="Select Photo"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/photo_preview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/submit_post_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_border"
+                android:text="Submit Post"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
