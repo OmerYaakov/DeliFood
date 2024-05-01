@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.PostRecyclerViewFragment
 import com.example.delifood.R
+import com.example.delifood.viewmodel.UserEvent
 
 class RegisterFormFragment : Fragment() {
 
@@ -70,6 +71,8 @@ class RegisterFormFragment : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
             val homeFragment = PostRecyclerViewFragment()
+
+
             transaction.replace(R.id.fcvMainActivity, homeFragment)
             transaction.addToBackStack(null)
             transaction.commit()
