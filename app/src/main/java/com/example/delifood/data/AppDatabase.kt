@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
     entities = [User::class],
     version = 1
 )
-abstract class AppDatabse:RoomDatabase(){
-    abstract val userDoa:UserDao
+abstract class AppDatabase:RoomDatabase(){
+    abstract val userDao:UserDao
 }
+

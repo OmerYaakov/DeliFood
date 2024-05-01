@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +16,16 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.delifood.PostRecyclerViewFragment
 import com.example.delifood.R
+import com.example.delifood.UserState
 import com.example.delifood.viewmodel.UserEvent
 
-class RegisterFormFragment : Fragment() {
-
+class RegisterFormFragment(
+    private val state:UserState,
+    private val  onEvent: (UserEvent) -> Unit
+) : Fragment() {
 
     private var tvAppName: TextView? = null
     private var etRegisterUsername: EditText? = null
@@ -35,11 +40,11 @@ class RegisterFormFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_GALLERY = 2
 
-    companion object {
-        fun newInstance(): RegisterFormFragment {
-            return RegisterFormFragment()
-        }
-    }
+//    companion object {
+//        fun newInstance(): RegisterFormFragment {
+//            return RegisterFormFragment()
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +77,13 @@ class RegisterFormFragment : Fragment() {
             val transaction = fragmentManager.beginTransaction()
             val homeFragment = PostRecyclerViewFragment()
 
+            val username = etRegisterUsername?.text.toString()
+            val email = etRegisterEmail?.text.toString()
+            val password = etRegisterPassword?.text.toString()
+
+            Log.d("RegisterFormFragment", "Registering User {username: $username, email: $email, password: $password}")
+
+        onEvent(UserEvent.RegisterUser(username, email, password))
 
             transaction.replace(R.id.fcvMainActivity, homeFragment)
             transaction.addToBackStack(null)

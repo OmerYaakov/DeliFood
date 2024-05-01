@@ -10,9 +10,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.PostRecyclerViewFragment
 import com.example.delifood.R
+import com.example.delifood.UserState
 import com.example.delifood.module.register.RegisterFormFragment
+import com.example.delifood.viewmodel.UserEvent
 
-class LoginFragment:Fragment() {
+class LoginFragment(
+    private val state: UserState,
+    private val onEvent: (UserEvent) -> Unit
+):Fragment() {
+
 
     private var tvWelcome: TextView? = null
     private var editTextEmail: EditText? = null
@@ -20,11 +26,11 @@ class LoginFragment:Fragment() {
     private var btnLogin: Button? = null
     private var btnRegister: Button? = null
 
-    companion object {
-        fun newInstance(): LoginFragment {
-            return LoginFragment()
-        }
-    }
+//    companion object {
+//        fun newInstance(): LoginFragment {
+//            return LoginFragment()
+//        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +58,7 @@ class LoginFragment:Fragment() {
         btnRegister?.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-            val registerFragment = RegisterFormFragment()
+            val registerFragment = RegisterFormFragment(state = state, onEvent = onEvent)
             transaction.replace(R.id.fcvMainActivity, registerFragment)
             transaction.addToBackStack(null)
             transaction.commit()
