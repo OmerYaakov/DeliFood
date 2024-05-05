@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="DESCRIPTION"
         android:textSize="20sp"
@@ -51,7 +51,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:text="PUBLISHER"
-        android:textSize="10sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPostRow" />
 
@@ -62,7 +62,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:text="TITLE"
-        android:textSize="10sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/tvPostRowDate"
         app:layout_constraintStart_toEndOf="@+id/tvPublisherRow"
         app:layout_constraintTop_toBottomOf="@+id/ivPostRow" />
