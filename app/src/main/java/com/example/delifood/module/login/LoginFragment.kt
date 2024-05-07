@@ -10,10 +10,10 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.FirebaseAuthManager
-import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
+import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.module.register.RegisterFormFragment
 import com.example.delifood.viewmodel.UserEvent
 
@@ -58,9 +58,9 @@ class LoginFragment(
             val email = editTextEmail?.text.toString()
             val password = editTextPassword?.text.toString()
 
-            firebaseAuthManager.loginUser(email, password) { result ->
-                if (result.isSuccess) {
-                    val user = result.getOrNull()
+            firebaseAuthManager.loginUser(email, password) {
+                if (it.isSuccess) {
+                    val user = it.getOrNull()
                     if (user != null) {
                         Log.d("LoginFragment", "User logged in")
                         Log.d("LoginFragment", "User: ${user.user?.uid}")

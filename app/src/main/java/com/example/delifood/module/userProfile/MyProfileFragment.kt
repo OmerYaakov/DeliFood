@@ -17,7 +17,6 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.example.delifood.R
 import java.io.ByteArrayOutputStream
@@ -72,10 +71,10 @@ class MyProfileFragment : Fragment() {
         usernameValueTextView?.text = username
         emailValueTextView?.text = email
 
-        originalPhotoUri = profilePhoto?.drawable?.toBitmap()?.let { bitmap ->
-            val uri = bitmapToUri(requireContext(), bitmap)
-            uri
-        }
+//        originalPhotoUri = profilePhoto?.drawable?.toBitmap()?.let { bitmap ->
+//            val uri = bitmapToUri(requireContext(), bitmap)
+//            uri
+//        }
     }
 
    private fun setupUI(view: View) {

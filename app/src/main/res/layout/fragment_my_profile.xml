@@ -123,14 +123,14 @@
         android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/button_border"
         android:clickable="true"
         android:focusable="true"
         android:text="edit profile"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameValueTextView" />
 
@@ -147,6 +147,20 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editUsernameValueTextView" />
+
+    <Button
+        android:id="@+id/logoutProfileButton"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/button_cancel"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="logout"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameValueTextView" />
 
     <Button
         android:id="@+id/CancelProfileButton"
