@@ -1,3 +1,4 @@
+
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -13,10 +14,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.example.delifood.PostState
 import com.example.delifood.R
+import com.example.delifood.data.Post
 import java.io.ByteArrayOutputStream
 
-class CreatePostFragment : Fragment() {
+class CreatePostFragment(
+    private val state: PostState,
+    private val onEvent: (PostEvent) -> Unit
+) : Fragment() {
 
     private val REQUEST_PICK_IMAGE = 1
     private val REQUEST_TAKE_PHOTO = 2
@@ -26,6 +32,9 @@ class CreatePostFragment : Fragment() {
     private var submitPostButton: Button? = null
     private var postTitle: EditText? = null
     private var postContent: EditText? = null
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,8 +59,13 @@ class CreatePostFragment : Fragment() {
 
         submitPostButton?.setOnClickListener {
             val title = postTitle?.text.toString()
-            val content = postContent?.text.toString()
+            val description = postContent?.text.toString()
             val photo = selectedPhotoUri
+
+
+
+
+            onEvent(PostEvent.CreatePost(Post(title, "123")))
 
             // TODO: Implement logic to upload the post with title, content, and photo
 

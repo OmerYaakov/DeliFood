@@ -4,10 +4,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [User::class],
+    entities = [Post::class],
     version = 1
 )
 abstract class AppDatabase:RoomDatabase(){
+    abstract val postDao:PostDao
     abstract val userDao:UserDao
 }
 
