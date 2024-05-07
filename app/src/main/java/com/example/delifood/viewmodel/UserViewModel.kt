@@ -38,16 +38,10 @@ class UserViewModel(
     private fun UserViewModel.login(uid : String) {
         viewModelScope.launch {
             Log.d("UserViewModel", "login: $uid")
-            dao.getUserByUid(uid)
-                .collect { dbUser ->
-                    if (dbUser.uid.isNotEmpty()) {
-                        Log.d("UserViewModel", "login success: ${dbUser.uid}")
-                        state.update { it.copy(user = dbUser) }
-                    } else {
-                        Log.d("UserViewModel", "login failed")
-                        state.update { it.copy(user = null) }
-                    }
-                }
+//            dao.getUserByUid(uid)
+//                .collect { dbUser ->
+//                    Log.d("UserViewModel", "login: $dbUser")
+//                }
         }
     }
 

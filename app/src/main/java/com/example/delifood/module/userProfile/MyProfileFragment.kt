@@ -19,9 +19,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.R
+import com.example.delifood.SessionManager
+import com.example.delifood.UserState
+import com.example.delifood.module.login.LoginFragment
+import com.example.delifood.module.register.RegisterFormFragment
+import com.example.delifood.viewmodel.UserEvent
 import java.io.ByteArrayOutputStream
 
-class MyProfileFragment : Fragment() {
+class MyProfileFragment(
+    private val state: UserState,
+    private val onEvent: (UserEvent) -> Unit
+
+) : Fragment() {
    private var usernameValueTextView: TextView? = null
    private var emailValueTextView: TextView? = null
    private var editUsernameEditText: EditText? = null
@@ -92,7 +101,18 @@ class MyProfileFragment : Fragment() {
         passwordValueTextView = view.findViewById(R.id.passwordValueTextView)
         editPasswordTextView = view.findViewById(R.id.editPasswordValueTextView)
 
+       logoutButton?.setOnClickListener {
+           val fragmentManager = requireActivity().supportFragmentManager
+           val transaction = fragmentManager.beginTransaction()
+           val loginFragment = LoginFragment(state = state, onEvent = onEvent)
 
+           Log.d("MyProfileFragment", "Logging out user")
+           SessionManager.logoutUser()
+
+           transaction.replace(R.id.fcvMainActivity, loginFragment)
+           transaction.addToBackStack(null)
+           transaction.commit()
+       }
 
     }
 
@@ -143,6 +163,11 @@ class MyProfileFragment : Fragment() {
             originalPhotoUri?.let { profilePhoto?.setImageURI(it) }
         }
 
+
+        logoutButton?.setOnClickListener {
+            Log.d("MyProfileFragment", "Logging out user")
+            Log.d("MyProfileFragment", "Logging out user")
+        }
     }
 
     private fun saveProfile() {

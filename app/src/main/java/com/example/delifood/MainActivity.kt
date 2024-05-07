@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val loginFragment = LoginFragment(state = userState, onEvent = userViewModel::onEvent)
         val createPostFragment = CreatePostFragment( state = postState, onEvent = postViewModel::onEvent);
         val postRecyclerViewFragment = PostRecyclerViewFragment();
-        val myProfileFragment = MyProfileFragment();
+        val myProfileFragment = MyProfileFragment(state = userState, onEvent = userViewModel::onEvent)
 
         setContentView(R.layout.activity_main)
 
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         SessionManager.init(this)
 
         if (SessionManager.isLoggedIn()) {
-            userViewModel.onEvent(UserEvent.Login(SessionManager.getUserId().toString()))
+//            userViewModel.onEvent(UserEvent.Login(SessionManager.getUserId()))
             showHomeFragment(postRecyclerViewFragment)
             addPostNavBtn?.visibility = View.VISIBLE
             profileNavBtn?.visibility = View.VISIBLE
