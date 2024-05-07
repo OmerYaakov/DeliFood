@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.delifood.FirebaseAuthManager
 import com.example.delifood.PostRecyclerViewFragment
 import com.example.delifood.R
 import com.example.delifood.UserState
@@ -26,6 +27,9 @@ class RegisterFormFragment(
     private val state:UserState,
     private val  onEvent: (UserEvent) -> Unit
 ) : Fragment() {
+
+    val  firebaseAuthManager = FirebaseAuthManager()
+
 
     private var tvAppName: TextView? = null
     private var etRegisterUsername: EditText? = null
@@ -39,12 +43,6 @@ class RegisterFormFragment(
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_GALLERY = 2
-
-//    companion object {
-//        fun newInstance(): RegisterFormFragment {
-//            return RegisterFormFragment()
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,19 +79,27 @@ class RegisterFormFragment(
             val email = etRegisterEmail?.text.toString()
             val password = etRegisterPassword?.text.toString()
 
-            Log.d("RegisterFormFragment", "Registering User {username: $username, email: $email, password: $password}")
+            firebaseAuthManager.registerUser(email, password) { result ->
+                if (result.isSuccess) {
+                    Log.d("RegisterFormFragment", "User registered successfully")
+                } else {
+                    Log.e("RegisterFormFragment", "Failed to register user", result.exceptionOrNull())
+                }
+            }
 
-        onEvent(UserEvent.RegisterUser(username, email, password))
 
-            transaction.replace(R.id.fcvMainActivity, homeFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
+            onEvent(UserEvent.RegisterUser(username, email, password))
+                transaction.replace(R.id.fcvMainActivity, homeFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
 
-        btnCancel?.setOnClickListener {
 
-            requireActivity().supportFragmentManager.popBackStack()
-        }
+
+            btnCancel?.setOnClickListener {
+                requireActivity().supportFragmentManager.popBackStack()
+            }
+
     }
 
     private fun selectImage() {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "33510221944",
+    "project_id": "delifood-bf15b",
+    "storage_bucket": "delifood-bf15b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33510221944:android:aec25e8c12ba484cc3a58d",
+        "android_client_info": {
+          "package_name": "com.example.delifood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRsWBCGTgxfE-NJCq16C357bNeYY6y14E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

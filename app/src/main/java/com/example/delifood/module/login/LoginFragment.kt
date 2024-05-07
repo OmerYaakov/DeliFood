@@ -1,6 +1,7 @@
 package com.example.delifood.module.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.delifood.FirebaseAuthManager
 import com.example.delifood.PostRecyclerViewFragment
 import com.example.delifood.R
 import com.example.delifood.UserState
@@ -19,6 +21,7 @@ class LoginFragment(
     private val onEvent: (UserEvent) -> Unit
 ):Fragment() {
 
+    var firebaseAuthManager = FirebaseAuthManager()
 
     private var tvWelcome: TextView? = null
     private var editTextEmail: EditText? = null
@@ -51,9 +54,23 @@ class LoginFragment(
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
             val homeFragment = PostRecyclerViewFragment()
-            transaction.replace(R.id.fcvMainActivity, homeFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+
+            val email = editTextEmail?.text.toString()
+            val password = editTextPassword?.text.toString()
+            firebaseAuthManager.loginUser(email, password) { result ->
+                if (result.isSuccess) {
+                    val user = result.getOrNull()
+                    if (user != null) {
+                        Log.d("LoginFragment", "User logged in")
+                        transaction.replace(R.id.fcvMainActivity, homeFragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+                    } else {
+                        // Handle error
+                    }
+                }
+            }
+
         }
         btnRegister?.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
