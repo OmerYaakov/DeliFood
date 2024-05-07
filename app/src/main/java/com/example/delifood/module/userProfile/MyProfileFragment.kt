@@ -32,6 +32,7 @@ class MyProfileFragment : Fragment() {
    private var saveButton: Button? = null
    private var editButton: Button? = null
    private var cancelButton: Button? = null
+    private var logoutButton: Button? = null
    private var isEditing = false
    private var editPhotoProfile: ImageButton? = null
    private var username: String? = null
@@ -84,6 +85,7 @@ class MyProfileFragment : Fragment() {
         editEmailEditText = view.findViewById(R.id.editEmailValueTextView)
         saveButton = view.findViewById(R.id.saveProfileButton)
         editButton = view.findViewById(R.id.editProfileButton)
+       logoutButton = view.findViewById(R.id.logoutProfileButton)
         cancelButton = view.findViewById(R.id.CancelProfileButton)
         profilePhoto = view.findViewById(R.id.profilePictureImageView)
         editPhotoProfile = view.findViewById(R.id.btnUploadProfile)
@@ -106,6 +108,7 @@ class MyProfileFragment : Fragment() {
         usernameValueTextView?.visibility = View.GONE
         emailValueTextView?.visibility = View.GONE
         passwordValueTextView?.visibility = View.GONE
+        logoutButton?.visibility = View.GONE
         editPhotoProfile?.setOnClickListener() {
             selectImage()
         }
@@ -132,6 +135,7 @@ class MyProfileFragment : Fragment() {
         usernameValueTextView?.visibility = View.VISIBLE
         emailValueTextView?.visibility = View.VISIBLE
         passwordValueTextView?.visibility = View.VISIBLE
+        logoutButton?.visibility = View.VISIBLE
         newPhotoUri?.let {
             profilePhoto?.setImageURI(it)
         } ?: run {

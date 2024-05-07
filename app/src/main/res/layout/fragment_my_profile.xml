@@ -130,52 +130,53 @@
         android:text="edit profile"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameValueTextView" />
 
+
     <Button
         android:id="@+id/saveProfileButton"
-        android:layout_width="88dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/button_border"
-        android:text="Save"
-        android:focusable="true"
         android:clickable="true"
+        android:focusable="true"
+        android:text="save"
         android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editUsernameValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordValueTextView" />
 
     <Button
         android:id="@+id/logoutProfileButton"
-        android:layout_width="88dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
         android:layout_marginTop="140dp"
         android:background="@drawable/button_cancel"
         android:clickable="true"
         android:focusable="true"
         android:text="logout"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editProfileButton"
         app:layout_constraintTop_toBottomOf="@+id/usernameValueTextView" />
 
     <Button
         android:id="@+id/CancelProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="72dp"
         android:background="@drawable/button_cancel"
+        android:clickable="true"
+        android:focusable="true"
         android:text="Cancel"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        android:focusable="true"
-        android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@+id/editUsernameValueTextView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordValueTextView" />
 
     <EditText
         android:id="@+id/editUsernameValueTextView"
