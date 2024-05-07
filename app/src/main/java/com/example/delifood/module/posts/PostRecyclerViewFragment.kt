@@ -1,4 +1,4 @@
-package com.example.delifood
+package com.example.delifood.module.posts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.delifood.MainActivity
 import com.example.delifood.Model.Model
 import com.example.delifood.Model.Post
+import com.example.delifood.R
 
 class PostRecyclerViewFragment : Fragment() {
     private var posts: MutableList<Post>? = null

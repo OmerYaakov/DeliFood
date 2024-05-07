@@ -1,8 +1,7 @@
 package com.example.delifood
 
-data class UserState(
-    val username:String = "",
-    val email:String = "",
-    val loggedIn:Boolean =false,
+import com.example.delifood.data.User
 
+data class UserState(
+    val user: User? = null
 )

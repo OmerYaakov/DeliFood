@@ -2,6 +2,8 @@ package com.example.delifood
 
 import CreatePostFragment
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.delifood.data.AppDatabase
 import com.example.delifood.module.login.LoginFragment
+import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.module.userProfile.MyProfileFragment
 import com.example.delifood.viewmodel.PostViewModel
+import com.example.delifood.viewmodel.UserEvent
 
 
 import com.example.delifood.viewmodel.UserViewModel
@@ -22,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val db by lazy {
     Room.databaseBuilder(
         applicationContext,
-        AppDatabase::class.java, "user.db"
+        AppDatabase::class.java, "app.db"
     ).build()
     }
 
@@ -70,7 +74,20 @@ class MainActivity : AppCompatActivity() {
         profileNavBtn = findViewById(R.id.myProfileNavBtn)
         homeNavBtn = findViewById(R.id.homeNavBtn)
 
-        showLoginFragment( loginFragment)
+        // init session manager
+        SessionManager.init(this)
+
+        if (SessionManager.isLoggedIn()) {
+            userViewModel.onEvent(UserEvent.Login(SessionManager.getUserId().toString()))
+            showHomeFragment(postRecyclerViewFragment)
+            addPostNavBtn?.visibility = View.VISIBLE
+            profileNavBtn?.visibility = View.VISIBLE
+            homeNavBtn?.visibility = View.VISIBLE
+        } else {
+            showLoginFragment(loginFragment)
+        }
+
+
 
         addPostNavBtn = findViewById(R.id.addPostNevBtn)
         homeNavBtn = findViewById(R.id.homeNavBtn)
@@ -116,6 +133,7 @@ class MainActivity : AppCompatActivity() {
     private fun showHomeFragment( postRecyclerViewFragment: PostRecyclerViewFragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+
 
         fragmentTransaction.replace(R.id.fcvMainActivity, postRecyclerViewFragment)
         fragmentTransaction.commit()

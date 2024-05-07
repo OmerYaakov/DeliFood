@@ -1,4 +1,4 @@
-package com.example.delifood
+package com.example.delifood.module.posts
 
 import android.view.View
 import android.widget.Button
@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.delifood.Model.Post
+import com.example.delifood.R
 
 
 class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

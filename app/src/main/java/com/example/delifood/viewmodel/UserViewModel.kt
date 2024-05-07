@@ -21,41 +21,48 @@ class UserViewModel(
 
     fun onEvent(event: UserEvent){
         when(event){
-            is UserEvent.DeleteUser->{
-                viewModelScope.launch {
-                    dao.deleteUser(event.user)
-                }
-            }
-            is UserEvent.SaveUser->{
-                state.update { it.copy(
-                ) }
-            }
-            is UserEvent.SetEmail->{
-                TODO()
-            }
-            is UserEvent.SetPassword->{
-                TODO()
-            }
-            is UserEvent.SetUsername->{
-                TODO()
-            }
-            is UserEvent.RegisterUser->{
-                viewModelScope.launch {
-                    val username = event.username
-                    val email = event.email
-                    val password = event.password
-
-                    val user = User(
-                        username = username,
-                        email = email,
-                        password = password
-                    )
-                    dao.upsertUser(user)
-                }
-            }
-            else ->{
-                TODO()
-            }
+            is UserEvent.Register -> register(event.user)
+            is UserEvent.Login -> login(event.uid)
+            is UserEvent.Logout -> logout(event.user)
+            is UserEvent.Update -> update(event.user)
+            else -> Log.d("UserViewModel", "onEvent: Invalid event")
         }
     }
+    private fun UserViewModel.register(user: User) {
+        viewModelScope.launch {
+            dao.upsertUser(user)
+            state.update { it.copy(user = user) }
+        }
+    }
+
+    private fun UserViewModel.login(uid : String) {
+        viewModelScope.launch {
+            Log.d("UserViewModel", "login: $uid")
+            dao.getUserByUid(uid)
+                .collect { dbUser ->
+                    if (dbUser.uid.isNotEmpty()) {
+                        Log.d("UserViewModel", "login success: ${dbUser.uid}")
+                        state.update { it.copy(user = dbUser) }
+                    } else {
+                        Log.d("UserViewModel", "login failed")
+                        state.update { it.copy(user = null) }
+                    }
+                }
+        }
+    }
+
+    private fun UserViewModel.logout(user: User) {
+        viewModelScope.launch {
+            dao.deleteUser(user)
+            state.update { it.copy(user = null) }
+        }
+    }
+
+    private fun UserViewModel.update(user: User) {
+        viewModelScope.launch {
+            dao.upsertUser(user)
+            state.update { it.copy(user = user) }
+        }
+    }
+
 }

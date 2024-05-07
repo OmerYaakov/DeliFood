@@ -1,9 +1,10 @@
-package com.example.delifood
+package com.example.delifood.module.posts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.delifood.Model.Post
+import com.example.delifood.R
 
 class PostRecyclerViewAdapter(private val posts: List<Post>?) : RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {

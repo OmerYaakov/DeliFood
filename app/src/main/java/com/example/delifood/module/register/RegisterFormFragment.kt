@@ -18,9 +18,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.delifood.FirebaseAuthManager
-import com.example.delifood.PostRecyclerViewFragment
+import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.R
 import com.example.delifood.UserState
+import com.example.delifood.data.User
 import com.example.delifood.viewmodel.UserEvent
 
 class RegisterFormFragment(
@@ -28,7 +29,7 @@ class RegisterFormFragment(
     private val  onEvent: (UserEvent) -> Unit
 ) : Fragment() {
 
-    val  firebaseAuthManager = FirebaseAuthManager()
+    private val  firebaseAuthManager = FirebaseAuthManager()
 
 
     private var tvAppName: TextView? = null
@@ -82,24 +83,24 @@ class RegisterFormFragment(
             firebaseAuthManager.registerUser(email, password) { result ->
                 if (result.isSuccess) {
                     Log.d("RegisterFormFragment", "User registered successfully")
+                    result.getOrNull()?.user?.uid?.let { uid ->
+                        val user = User(username, email, uid)
+                        onEvent(UserEvent.Register(user))
+
+                        transaction.replace(R.id.fcvMainActivity, homeFragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+                    }
                 } else {
-                    Log.e("RegisterFormFragment", "Failed to register user", result.exceptionOrNull())
+                    Log.e("RegisterFormFragment", "Failed to register user")
                 }
             }
-
-
-            onEvent(UserEvent.RegisterUser(username, email, password))
-                transaction.replace(R.id.fcvMainActivity, homeFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-            }
-
-
 
             btnCancel?.setOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
             }
 
+        }
     }
 
     private fun selectImage() {
