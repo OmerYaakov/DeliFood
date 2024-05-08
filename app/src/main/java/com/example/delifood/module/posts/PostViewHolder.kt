@@ -15,8 +15,7 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var postDescription: TextView = itemView.findViewById(R.id.tvPostRowDescription)
     private var postPublisher: TextView = itemView.findViewById(R.id.tvPublisherRow)
     private var postImage: ImageView = itemView.findViewById(R.id.ivPostRow)
-    private var myPosts: Button = itemView.findViewById(R.id.myPostsBtn)
-    private var allPosts: Button = itemView.findViewById(R.id.allPostsBtn)
+
 
 
     fun bind(post: Post?) {
