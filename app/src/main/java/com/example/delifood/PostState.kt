@@ -1,7 +1,6 @@
 package com.example.delifood
 
-import com.example.delifood.Model.Post
-import java.util.Date
+import com.example.delifood.data.Post
 
 data class PostState(
     val posts: List<Post> = emptyList()

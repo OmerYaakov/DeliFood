@@ -23,8 +23,6 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE id = :id")
     fun getCurrentUser(id:Int): Flow<User>
 
-    @Upsert
-    suspend fun setCurrentUser(user: User){
-        upsertUser(user)
-    }
+    @Query("UPDATE user SET username = :username WHERE uid = :uid")
+    suspend fun updateUsername(username: String, uid: String)
 }

@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
+import com.example.delifood.data.User
 import com.example.delifood.module.login.LoginFragment
 import com.example.delifood.viewmodel.UserEvent
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +38,7 @@ class MyProfileFragment(
    private var usernameValueTextView: TextView? = null
    private var emailValueTextView: TextView? = null
    private var editUsernameEditText: EditText? = null
-    private var passwordValueTextView: TextView? = null
+    private var uidValueTextView: TextView? = null
    private var profilePhoto: ImageView? = null
    private var saveButton: Button? = null
    private var editButton: Button? = null
@@ -47,7 +48,7 @@ class MyProfileFragment(
    private var editPhotoProfile: ImageButton? = null
    private var username: String? = null
    private var email: String? = null
-    private var password: String? = null
+    private var uid : String? = null
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_GALLERY = 2
@@ -75,13 +76,13 @@ class MyProfileFragment(
         // Set up user profile data
         Log.d("MyProfileFragment", "Setting up user profile data")
         Log.d("MyProfileFragment", "User: ${state.value.user}")
-        val username = state.value.user?.username ?: "N/A"
-        val email = state.value.user?.email ?: "N/A"
-        val uid = state.value.user?.uid ?: "N/A"
+        username = state.value.user?.username ?: "N/A"
+        email = state.value.user?.email ?: "N/A"
+        uid = state.value.user?.uid ?: "N/A"
 
         usernameValueTextView?.text = username
         emailValueTextView?.text = email
-        passwordValueTextView?.text = uid
+        uidValueTextView?.text = uid
 
 //        originalPhotoUri = profilePhoto?.drawable?.toBitmap()?.let { bitmap ->
 //            val uri = bitmapToUri(requireContext(), bitmap)
@@ -99,7 +100,7 @@ class MyProfileFragment(
         cancelButton = view.findViewById(R.id.CancelProfileButton)
         profilePhoto = view.findViewById(R.id.profilePictureImageView)
         editPhotoProfile = view.findViewById(R.id.btnUploadProfile)
-        passwordValueTextView = view.findViewById(R.id.uidValueTextView)
+        uidValueTextView = view.findViewById(R.id.uidValueTextView)
 
        logoutButton?.setOnClickListener {
            val fragmentManager = requireActivity().supportFragmentManager
@@ -168,8 +169,10 @@ class MyProfileFragment(
 
         usernameValueTextView?.text = username
         emailValueTextView?.text = email
-        passwordValueTextView?.text = password
-        Log.d("saveProfile", "Saving profile {username: $username, email: $email}")
+        uidValueTextView?.text = uid
+
+        onEvent(UserEvent.Update(User(username = username!!, email = email!!, uid = uid!!)))
+
     }
 
     private fun selectImage() {

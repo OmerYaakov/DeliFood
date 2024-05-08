@@ -1,11 +1,10 @@
 package com.example.delifood.module.posts
 
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.delifood.Model.Post
+import com.example.delifood.data.Post
 import com.example.delifood.R
 
 
@@ -18,10 +17,10 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(post: Post?) {
-        postTitle.text = post?.postTitle
-        postDate.text = post?.postDate.toString()
-        postDescription.text = post?.postDescription
-        postPublisher.text = post?.postPublisher
+        postTitle.text = post?.title
+        postDate.text = "Today"
+        postDescription.text = "This is a description of the post."
+        postPublisher.text = "Publisher Name"
         postImage.setImageResource(R.drawable.avatar_profile)
 
     }

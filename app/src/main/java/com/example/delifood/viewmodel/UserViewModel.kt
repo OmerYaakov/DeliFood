@@ -56,7 +56,7 @@ class UserViewModel(
 
     private fun UserViewModel.update(user: User) {
         viewModelScope.launch {
-            dao.upsertUser(user)
+            dao.updateUsername(user.username, user.uid)
             state.update { it.copy(user = user) }
         }
     }

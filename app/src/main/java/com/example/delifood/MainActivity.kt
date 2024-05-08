@@ -63,10 +63,11 @@ class MainActivity : AppCompatActivity() {
         val postState = postViewModel.state
         val userState = userViewModel.state
 
+        postViewModel.onEvent(PostEvent.GetAllPosts)
 
         val loginFragment = LoginFragment(state = userState, onEvent = userViewModel::onEvent)
         val createPostFragment = CreatePostFragment( state = postState, onEvent = postViewModel::onEvent);
-        val postRecyclerViewFragment = PostRecyclerViewFragment();
+        val postRecyclerViewFragment = PostRecyclerViewFragment(postState = postState)
         val myProfileFragment = MyProfileFragment(state = userState, onEvent = userViewModel::onEvent)
         val weatherFragment = WeatherFragment()
 

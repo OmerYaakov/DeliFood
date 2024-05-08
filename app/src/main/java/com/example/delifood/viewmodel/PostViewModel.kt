@@ -2,6 +2,7 @@ package com.example.delifood.viewmodel
 
 
 import PostEvent
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.delifood.PostState
@@ -30,13 +31,14 @@ class PostViewModel(
                     dao.deletePost(event.post)
                 }
             }
-//            is PostEvent.GetAllPosts -> {
-//                viewModelScope.launch {
-//                    dao.getAllPosts().collect {
-//                        state.update { it.copy(posts = it.posts + it.posts) }
-//                    }
-//                }
-//            }
+            is PostEvent.GetAllPosts -> {
+                viewModelScope.launch {
+                    dao.getAllPosts().collect {
+                        state.update { itState -> itState.copy(posts = it) }
+                        Log.d("PostViewModel", "onEvent: ${state.value.posts}")
+                    }
+                }
+            }
             is PostEvent.GetPostByUid -> {
                 viewModelScope.launch {
                     dao.getPostByUid(event.uid).collect {

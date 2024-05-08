@@ -188,7 +188,7 @@
         android:layout_marginStart="22dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/white"
-        android:text="your name"
+        android:hint="your name"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="18sp"

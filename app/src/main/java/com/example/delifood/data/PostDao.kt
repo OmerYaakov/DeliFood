@@ -15,8 +15,8 @@ interface PostDao {
     @Delete
     fun deletePost(post: Post)
 
-//    @Query("SELECT * FROM post ORDER BY date ASC")
-//    fun getAllPosts(): Flow<List<Post>>
+    @Query("SELECT * FROM post")
+    fun getAllPosts(): Flow<List<Post>>
 
     @Query("SELECT * FROM post WHERE uid = :uid")
     fun getPostByUid(uid: String): Flow<Post>
