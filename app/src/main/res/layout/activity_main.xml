@@ -47,7 +47,7 @@
         android:textColor="@color/black"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/myPostsNavBtn"
+        app:layout_constraintEnd_toStartOf="@+id/weatherNavBtn"
         app:layout_constraintStart_toEndOf="@+id/homeNavBtn" />
 
     <Button
@@ -60,14 +60,14 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/myPostsNavBtn" />
+        app:layout_constraintStart_toEndOf="@+id/weatherNavBtn" />
 
     <Button
-        android:id="@+id/myPostsNavBtn"
+        android:id="@+id/weatherNavBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/nav_bar_btn"
-        android:text="my posts"
+        android:text="weather"
         android:textColor="@color/black"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

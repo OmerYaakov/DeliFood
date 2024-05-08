@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.delifood.data.AppDatabase
+import com.example.delifood.module.WeatherFragment
 import com.example.delifood.module.login.LoginFragment
 import com.example.delifood.module.posts.CreatePostFragment
 import com.example.delifood.module.posts.PostRecyclerViewFragment
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         var profileNavBtn: Button? = null
         var addPostNavBtn: Button? = null
         var myPostsNavBtn: Button? = null
+        var weatherNavBtn: Button? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,13 +68,14 @@ class MainActivity : AppCompatActivity() {
         val createPostFragment = CreatePostFragment( state = postState, onEvent = postViewModel::onEvent);
         val postRecyclerViewFragment = PostRecyclerViewFragment();
         val myProfileFragment = MyProfileFragment(state = userState, onEvent = userViewModel::onEvent)
+        val weatherFragment = WeatherFragment()
 
         setContentView(R.layout.activity_main)
 
         addPostNavBtn = findViewById(R.id.addPostNavBtn)
         profileNavBtn = findViewById(R.id.myProfileNavBtn)
         homeNavBtn = findViewById(R.id.homeNavBtn)
-        myPostsNavBtn = findViewById(R.id.myPostsNavBtn)
+        weatherNavBtn = findViewById(R.id.weatherNavBtn)
 
         // init session manager
         SessionManager.init(this)
@@ -83,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             addPostNavBtn?.visibility = View.VISIBLE
             profileNavBtn?.visibility = View.VISIBLE
             homeNavBtn?.visibility = View.VISIBLE
-            myPostsNavBtn?.visibility = View.VISIBLE
+            weatherNavBtn?.visibility = View.VISIBLE
         } else {
             showLoginFragment(loginFragment)
         }
@@ -100,6 +103,18 @@ class MainActivity : AppCompatActivity() {
         profileNavBtn?.setOnClickListener {
             showMyProfileFragment(myProfileFragment)
         }
+        weatherNavBtn?.setOnClickListener {
+            showWeatherFragment(weatherFragment)
+        }
+    }
+
+    private fun showWeatherFragment(weatherFragment: WeatherFragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.fcvMainActivity, weatherFragment)
+        fragmentTransaction.commit()
+
     }
 
 //    private fun removeFragment() {
