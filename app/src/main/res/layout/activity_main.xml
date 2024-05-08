@@ -29,42 +29,50 @@
         android:id="@+id/homeNavBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_btn"
         android:text="home"
+        android:textColor="@color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/myProfileNavBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        android:background="@drawable/nav_bar_btn"
-        android:textColor="@color/black"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
         android:id="@+id/myProfileNavBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="my profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addPostNevBtn"
-        app:layout_constraintStart_toEndOf="@+id/homeNavBtn"
-        android:visibility="gone"
         android:background="@drawable/nav_bar_btn"
-        android:textColor="@color/black"/>
-
-
-
+        android:text="my profile"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/myPostsNavBtn"
+        app:layout_constraintStart_toEndOf="@+id/homeNavBtn" />
 
     <Button
-        android:id="@+id/addPostNevBtn"
+        android:id="@+id/addPostNavBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_btn"
         android:text="create post"
+        android:textColor="@color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/myProfileNavBtn"
-        android:visibility="gone"
-        android:background="@drawable/nav_bar_btn"
-        android:textColor="@color/black"/>
+        app:layout_constraintStart_toEndOf="@+id/myPostsNavBtn" />
 
+    <Button
+        android:id="@+id/myPostsNavBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_btn"
+        android:text="my posts"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addPostNavBtn"
+        app:layout_constraintStart_toEndOf="@+id/myProfileNavBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,7 @@
 package com.example.delifood
 
-import com.example.delifood.module.posts.CreatePostFragment
+
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
@@ -12,12 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.delifood.data.AppDatabase
 import com.example.delifood.module.login.LoginFragment
+import com.example.delifood.module.posts.CreatePostFragment
 import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.module.userProfile.MyProfileFragment
 import com.example.delifood.viewmodel.PostViewModel
-import com.example.delifood.viewmodel.UserEvent
-
-
 import com.example.delifood.viewmodel.UserViewModel
 
 
@@ -54,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         var homeNavBtn: Button? = null
         var profileNavBtn: Button? = null
         var addPostNavBtn: Button? = null
+        var myPostsNavBtn: Button? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,9 +68,10 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        addPostNavBtn = findViewById(R.id.addPostNevBtn)
+        addPostNavBtn = findViewById(R.id.addPostNavBtn)
         profileNavBtn = findViewById(R.id.myProfileNavBtn)
         homeNavBtn = findViewById(R.id.homeNavBtn)
+        myPostsNavBtn = findViewById(R.id.myPostsNavBtn)
 
         // init session manager
         SessionManager.init(this)
@@ -83,15 +82,11 @@ class MainActivity : AppCompatActivity() {
             addPostNavBtn?.visibility = View.VISIBLE
             profileNavBtn?.visibility = View.VISIBLE
             homeNavBtn?.visibility = View.VISIBLE
+            myPostsNavBtn?.visibility = View.VISIBLE
         } else {
             showLoginFragment(loginFragment)
         }
 
-
-
-        addPostNavBtn = findViewById(R.id.addPostNevBtn)
-        homeNavBtn = findViewById(R.id.homeNavBtn)
-        profileNavBtn = findViewById(R.id.myProfileNavBtn)
 
         addPostNavBtn?.setOnClickListener {
             showNewPostFragment(createPostFragment)

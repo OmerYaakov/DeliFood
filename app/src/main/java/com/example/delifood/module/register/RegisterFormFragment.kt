@@ -14,14 +14,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.delifood.FirebaseAuthManager
-import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.R
 import com.example.delifood.UserState
 import com.example.delifood.data.User
+import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.viewmodel.UserEvent
 
 class RegisterFormFragment(
@@ -40,6 +40,7 @@ class RegisterFormFragment(
     private var btnUploadProfile: ImageButton? = null
     private var btnRegister: Button? = null
     private var btnCancel: Button? = null
+    private var progressBar: ProgressBar? = null
 
 
     private val REQUEST_IMAGE_CAPTURE = 1
@@ -64,6 +65,7 @@ class RegisterFormFragment(
         btnRegister = view.findViewById(R.id.btnRegister)
         btnUploadProfile = view.findViewById(R.id.btnUploadProfile)
         btnCancel = view.findViewById(R.id.btnCancel)
+        progressBar = view.findViewById(R.id.progressBar)
 
 
         btnUploadProfile?.setOnClickListener {
@@ -82,6 +84,13 @@ class RegisterFormFragment(
 
             firebaseAuthManager.registerUser(email, password) { result ->
                 if (result.isSuccess) {
+                    etRegisterUsername?.visibility  = View.INVISIBLE
+                    etRegisterEmail?.visibility  = View.INVISIBLE
+                    etRegisterPassword?.visibility  = View.INVISIBLE
+                    btnRegister?.visibility  = View.INVISIBLE
+                    btnUploadProfile?.visibility  = View.INVISIBLE
+                    btnCancel?.visibility  = View.INVISIBLE
+                    progressBar?.visibility = View.VISIBLE
                     Log.d("RegisterFormFragment", "User registered successfully")
                     result.getOrNull()?.user?.uid?.let { uid ->
                         val user = User(username, email, uid)
@@ -93,14 +102,21 @@ class RegisterFormFragment(
                     }
                 } else {
                     Log.e("RegisterFormFragment", "Failed to register user")
+                    etRegisterUsername?.visibility  = View.VISIBLE
+                    etRegisterEmail?.visibility  = View.VISIBLE
+                    etRegisterPassword?.visibility  = View.VISIBLE
+                    btnRegister?.visibility  = View.VISIBLE
+                    btnUploadProfile?.visibility  = View.VISIBLE
+                    btnCancel?.visibility  = View.VISIBLE
+                    progressBar?.visibility = View.INVISIBLE
                 }
             }
 
+        }
             btnCancel?.setOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
             }
 
-        }
     }
 
     private fun selectImage() {

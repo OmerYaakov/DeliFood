@@ -18,6 +18,7 @@ class PostRecyclerViewFragment : Fragment() {
     private var homeNavBtn: Button? = MainActivity.homeNavBtn
     private var profileNavBtn: Button? = MainActivity.profileNavBtn
     private var addPostNavBtn: Button? = MainActivity.addPostNavBtn
+    private var myPostsNavBtn: Button? = MainActivity.myPostsNavBtn
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,6 +32,7 @@ class PostRecyclerViewFragment : Fragment() {
         addPostNavBtn?.visibility = View.VISIBLE
         profileNavBtn?.visibility = View.VISIBLE
         homeNavBtn?.visibility = View.VISIBLE
+        myPostsNavBtn?.visibility = View.VISIBLE
 
         return view
     }
