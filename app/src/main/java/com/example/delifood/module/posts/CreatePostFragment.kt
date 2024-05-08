@@ -68,7 +68,7 @@ class CreatePostFragment(
 
 
 
-            onEvent(PostEvent.CreatePost(Post(title, "123")))
+            onEvent(PostEvent.CreatePost(Post(title, "12344")))
 
             // TODO: Implement logic to upload the post with title, content, and photo
 

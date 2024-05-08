@@ -19,6 +19,6 @@ interface PostDao {
     fun getAllPosts(): Flow<List<Post>>
 
     @Query("SELECT * FROM post WHERE uid = :uid")
-    fun getPostByUid(uid: String): Flow<Post>
+    fun getPostByUid(uid: String): Flow<List<Post>>
 
 }

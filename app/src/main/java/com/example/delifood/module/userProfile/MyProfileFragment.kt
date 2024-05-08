@@ -1,5 +1,6 @@
 package com.example.delifood.module.userProfile
 
+import PostEvent
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -19,6 +20,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.MainActivity
+import com.example.delifood.PostState
 import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
@@ -31,7 +33,9 @@ import java.io.ByteArrayOutputStream
 
 class MyProfileFragment(
     private val state: MutableStateFlow<UserState>,
-    private val onEvent: (UserEvent) -> Unit
+    private val onEvent: (UserEvent) -> Unit,
+    private val postState: MutableStateFlow<PostState> = MutableStateFlow(PostState(emptyList())),
+    private val onPostEvent: (PostEvent) -> Unit = {}
 ) : Fragment() {
 
 
@@ -85,10 +89,6 @@ class MyProfileFragment(
         emailValueTextView?.text = email
         uidValueTextView?.text = uid
 
-//        originalPhotoUri = profilePhoto?.drawable?.toBitmap()?.let { bitmap ->
-//            val uri = bitmapToUri(requireContext(), bitmap)
-//            uri
-//        }
     }
 
    private fun setupUI(view: View) {
@@ -110,7 +110,7 @@ class MyProfileFragment(
            MainActivity.addPostNavBtn?.visibility = View.GONE
            val fragmentManager = requireActivity().supportFragmentManager
            val transaction = fragmentManager.beginTransaction()
-           val loginFragment = LoginFragment(state = state, onEvent = onEvent)
+           val loginFragment = LoginFragment(state = state, onEvent = onEvent, postState = postState, onPostEvent = onPostEvent)
 
            Log.d("MyProfileFragment", "Logging out user")
            SessionManager.logoutUser()

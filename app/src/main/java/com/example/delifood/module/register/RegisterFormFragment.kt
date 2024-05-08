@@ -1,5 +1,6 @@
 package com.example.delifood.module.register
 
+import PostEvent
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -18,6 +19,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.FirebaseAuthManager
+import com.example.delifood.PostState
 import com.example.delifood.R
 import com.example.delifood.UserState
 import com.example.delifood.data.User
@@ -27,7 +29,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class RegisterFormFragment(
     private val state:MutableStateFlow<UserState>,
-    private val  onEvent: (UserEvent) -> Unit
+    private val  onEvent: (UserEvent) -> Unit,
+    private val postState: MutableStateFlow<PostState> = MutableStateFlow(PostState(emptyList())),
+    private val onPostEvent: (PostEvent) -> Unit = {}
 ) : Fragment() {
 
     private val  firebaseAuthManager = FirebaseAuthManager()
@@ -77,7 +81,7 @@ class RegisterFormFragment(
 
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-            val homeFragment = PostRecyclerViewFragment()
+            val homeFragment = PostRecyclerViewFragment(postState, onPostEvent)
 
             val username = etRegisterUsername?.text.toString()
             val email = etRegisterEmail?.text.toString()
@@ -92,6 +96,8 @@ class RegisterFormFragment(
                     btnUploadProfile?.visibility  = View.INVISIBLE
                     btnCancel?.visibility  = View.INVISIBLE
                     progressBar?.visibility = View.VISIBLE
+
+
                     Log.d("RegisterFormFragment", "User registered successfully")
                     result.getOrNull()?.user?.uid?.let { uid ->
                         val user = User(username, email, uid)

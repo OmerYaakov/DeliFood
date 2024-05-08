@@ -5,7 +5,9 @@ import PostEvent
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.delifood.FirebaseAuthManager
 import com.example.delifood.PostState
+import com.example.delifood.SessionManager
 import com.example.delifood.data.PostDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,6 +26,7 @@ class PostViewModel(
             is PostEvent.CreatePost -> {
                 viewModelScope.launch {
                     dao.upsertPost(event.post)
+                    state.update { itState -> itState.copy(posts = itState.posts + event.post) }
                 }
             }
             is PostEvent.DeletePost -> {
@@ -46,6 +49,16 @@ class PostViewModel(
                     }
                 }
             }
+            is PostEvent.SetMyPosts -> {
+                viewModelScope.launch {
+                    SessionManager.getUserId().let { it ->
+                        dao.getPostByUid("123").collect {itPost->
+                            state.update { it.copy(posts = itPost) }
+                        }
+                    }
+                }
+            }
+
             else -> {
                 TODO()
             }

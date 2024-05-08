@@ -6,4 +6,6 @@ sealed interface PostEvent {
     data object GetAllPosts : PostEvent
     data class GetPostByUid(val uid: String) : PostEvent
 
+    data object SetMyPosts : PostEvent
+
 }

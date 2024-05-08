@@ -1,5 +1,6 @@
 package com.example.delifood.module.login
 
+import PostEvent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.delifood.FirebaseAuthManager
+import com.example.delifood.PostState
 import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
@@ -20,7 +22,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class LoginFragment(
     private val state: MutableStateFlow<UserState>,
-    private val onEvent: (UserEvent) -> Unit
+    private val onEvent: (UserEvent) -> Unit,
+    private val postState: MutableStateFlow<PostState> = MutableStateFlow(PostState(emptyList())),
+    private val onPostEvent: (PostEvent) -> Unit = {}
 ):Fragment() {
 
     private var firebaseAuthManager = FirebaseAuthManager()
@@ -54,7 +58,7 @@ class LoginFragment(
         btnLogin?.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-            val homeFragment = PostRecyclerViewFragment()
+            val homeFragment = PostRecyclerViewFragment(postState, onPostEvent)
 
             val email = editTextEmail?.text.toString()
             val password = editTextPassword?.text.toString()
@@ -71,6 +75,7 @@ class LoginFragment(
                         // set session manager
                         SessionManager.loginUser(user.user!!.uid)
 
+                        onPostEvent(PostEvent.GetAllPosts)
                         transaction.replace(R.id.fcvMainActivity, homeFragment)
                         transaction.addToBackStack(null)
                         transaction.commit()
@@ -84,7 +89,7 @@ class LoginFragment(
         btnRegister?.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-            val registerFragment = RegisterFormFragment(state = state, onEvent = onEvent)
+            val registerFragment = RegisterFormFragment(state = state, onEvent = onEvent, postState = postState, onPostEvent = onPostEvent)
             transaction.replace(R.id.fcvMainActivity, registerFragment)
             transaction.addToBackStack(null)
             transaction.commit()

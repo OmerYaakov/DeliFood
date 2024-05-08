@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity() {
 
         val loginFragment = LoginFragment(state = userState, onEvent = userViewModel::onEvent)
         val createPostFragment = CreatePostFragment( state = postState, onEvent = postViewModel::onEvent);
-        val postRecyclerViewFragment = PostRecyclerViewFragment(postState = postState)
-        val myProfileFragment = MyProfileFragment(state = userState, onEvent = userViewModel::onEvent)
+        val postRecyclerViewFragment = PostRecyclerViewFragment(postState = postState, onEvent = postViewModel::onEvent)
+        val myProfileFragment = MyProfileFragment(state = userState, onEvent = userViewModel::onEvent, postState = postState, onPostEvent = postViewModel::onEvent)
         val weatherFragment = WeatherFragment()
 
         setContentView(R.layout.activity_main)
@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
+        postViewModel.onEvent(PostEvent.GetAllPosts)
 
         fragmentTransaction.replace(R.id.fcvMainActivity, postRecyclerViewFragment)
         fragmentTransaction.commit()
