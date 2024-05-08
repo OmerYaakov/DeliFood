@@ -22,7 +22,6 @@ import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
 import com.example.delifood.module.login.LoginFragment
-import com.example.delifood.module.register.RegisterFormFragment
 import com.example.delifood.viewmodel.UserEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.ByteArrayOutputStream

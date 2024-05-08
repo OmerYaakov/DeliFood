@@ -3,7 +3,6 @@ package com.example.delifood
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.example.delifood.viewmodel.PostViewModel
 
 object SessionManager {
     private const val PREF_NAME = "session_pref"
@@ -41,8 +40,8 @@ object SessionManager {
         return sharedPreferences.getString(KEY_USER_ID, "") ?: ""
     }
 
-    fun getUsername(): String {
-        return sharedPreferences.getString(KEY_USERNAME, "") ?: ""
-    }
+//    fun getUsername(): String {
+//        return sharedPreferences.getString(KEY_USERNAME, "") ?: ""
+//    }
 
 }
