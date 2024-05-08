@@ -23,9 +23,10 @@ import com.example.delifood.UserState
 import com.example.delifood.data.User
 import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.viewmodel.UserEvent
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class RegisterFormFragment(
-    private val state:UserState,
+    private val state:MutableStateFlow<UserState>,
     private val  onEvent: (UserEvent) -> Unit
 ) : Fragment() {
 

@@ -19,10 +19,11 @@ import androidx.fragment.app.Fragment
 import com.example.delifood.PostState
 import com.example.delifood.R
 import com.example.delifood.data.Post
+import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.ByteArrayOutputStream
 
 class CreatePostFragment(
-    private val state: PostState,
+    private val state: MutableStateFlow<PostState>,
     private val onEvent: (PostEvent) -> Unit
 ) : Fragment() {
 

@@ -15,6 +15,7 @@ import com.example.delifood.module.posts.CreatePostFragment
 import com.example.delifood.module.posts.PostRecyclerViewFragment
 import com.example.delifood.module.userProfile.MyProfileFragment
 import com.example.delifood.viewmodel.PostViewModel
+import com.example.delifood.viewmodel.UserEvent
 import com.example.delifood.viewmodel.UserViewModel
 
 
@@ -57,8 +58,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val postState = postViewModel.state.value // get the current state
-        val userState = userViewModel.state.value
+        val postState = postViewModel.state
+        val userState = userViewModel.state
 
 
         val loginFragment = LoginFragment(state = userState, onEvent = userViewModel::onEvent)
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         SessionManager.init(this)
 
         if (SessionManager.isLoggedIn()) {
-//            userViewModel.onEvent(UserEvent.Login(SessionManager.getUserId()))
+            userViewModel.onEvent(UserEvent.Login(SessionManager.getUserId()))
             showHomeFragment(postRecyclerViewFragment)
             addPostNavBtn?.visibility = View.VISIBLE
             profileNavBtn?.visibility = View.VISIBLE

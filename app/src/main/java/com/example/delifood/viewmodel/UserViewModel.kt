@@ -37,11 +37,13 @@ class UserViewModel(
 
     private fun UserViewModel.login(uid : String) {
         viewModelScope.launch {
-            Log.d("UserViewModel", "login: $uid")
-//            dao.getUserByUid(uid)
-//                .collect { dbUser ->
-//                    Log.d("UserViewModel", "login: $dbUser")
-//                }
+            Log.d("UserViewModel", "search in db with uid: $uid")
+            dao.getUserByUid(uid)
+                .collect { dbUser ->
+                    Log.d("UserViewModel", "found in Room: $dbUser")
+                    state.update { it.copy(user = dbUser) }
+                    Log.d("UserViewModel", "login in state: ${state.value.user}")
+                }
         }
     }
 

@@ -24,10 +24,11 @@ import com.example.delifood.UserState
 import com.example.delifood.module.login.LoginFragment
 import com.example.delifood.module.register.RegisterFormFragment
 import com.example.delifood.viewmodel.UserEvent
+import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.ByteArrayOutputStream
 
 class MyProfileFragment(
-    private val state: UserState,
+    private val state: MutableStateFlow<UserState>,
     private val onEvent: (UserEvent) -> Unit
 
 ) : Fragment() {
@@ -75,11 +76,15 @@ class MyProfileFragment(
         super.onViewCreated(view, savedInstanceState)
 
         // Set up user profile data
-        val username = "JohnDoe"
-        val email = "john.doe@example.com"
+        Log.d("MyProfileFragment", "Setting up user profile data")
+        Log.d("MyProfileFragment", "User: ${state.value.user}")
+        val username = state.value.user?.username ?: "N/A"
+        val email = state.value.user?.email ?: "N/A"
+        val uid = state.value.user?.uid ?: "N/A"
 
         usernameValueTextView?.text = username
         emailValueTextView?.text = email
+        passwordValueTextView?.text = uid
 
 //        originalPhotoUri = profilePhoto?.drawable?.toBitmap()?.let { bitmap ->
 //            val uri = bitmapToUri(requireContext(), bitmap)
@@ -154,7 +159,6 @@ class MyProfileFragment(
         editButton?.visibility = View.VISIBLE
         usernameValueTextView?.visibility = View.VISIBLE
         emailValueTextView?.visibility = View.VISIBLE
-        passwordValueTextView?.visibility = View.VISIBLE
         logoutButton?.visibility = View.VISIBLE
         newPhotoUri?.let {
             profilePhoto?.setImageURI(it)
