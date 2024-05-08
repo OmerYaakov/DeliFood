@@ -21,21 +21,10 @@ import androidx.fragment.app.Fragment
 import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
-import com.example.delifood.WeatherApi
-import com.example.delifood.WeatherResponse
 import com.example.delifood.module.login.LoginFragment
 import com.example.delifood.viewmodel.UserEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.ByteArrayOutputStream
-
-
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
 
 
 class MyProfileFragment(
@@ -64,34 +53,6 @@ class MyProfileFragment(
     private val REQUEST_IMAGE_GALLERY = 2
     private var originalPhotoUri: Uri? = null
     private var newPhotoUri: Uri? = null
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.openweathermap.org/data/2.5/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    fun makeWeatherApiCall() {
-        val weatherApi: WeatherApi = retrofit.create(WeatherApi::class.java)
-        val call: Call<WeatherResponse> = weatherApi.getWeather("London", "0edd121b283109fbb921dab8b27663f3")
-        call.enqueue(object : Callback<WeatherResponse> {
-            override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
-                if (response.isSuccessful) {
-                    val weatherResponse = response.body()
-                    if (weatherResponse != null) {
-                        Log.d("MyProfileFragment", "Weather response: $weatherResponse")
-                    } else {
-                        Log.e("MyProfileFragment", "Weather response is null")
-                    }
-                } else {
-                    val errorMessage = response.message()
-                    Log.e("MyProfileFragment", "Error: $errorMessage")
-                }
-            }
-            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-    }
 
 
     override fun onCreateView(
@@ -126,8 +87,6 @@ class MyProfileFragment(
 //            val uri = bitmapToUri(requireContext(), bitmap)
 //            uri
 //        }
-
-        makeWeatherApiCall()
     }
 
    private fun setupUI(view: View) {
@@ -154,7 +113,6 @@ class MyProfileFragment(
            transaction.addToBackStack(null)
            transaction.commit()
 
-           makeWeatherApiCall()
        }
 
     }
