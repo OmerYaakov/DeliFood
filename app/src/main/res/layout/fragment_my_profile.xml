@@ -63,12 +63,12 @@
 
 
     <TextView
-        android:id="@+id/passwordTextView"
+        android:id="@+id/uidTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Password: "
+        android:text="uid: "
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="18sp"
@@ -77,20 +77,20 @@
         app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
     <TextView
-        android:id="@+id/passwordValueTextView"
+        android:id="@+id/uidValueTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
         android:layout_marginEnd="8dp"
-        android:text="Password"
+        android:text="uid"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="18sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/passwordTextView"
-        app:layout_constraintTop_toTopOf="@+id/passwordTextView" />
+        app:layout_constraintStart_toEndOf="@+id/uidTextView"
+        app:layout_constraintTop_toTopOf="@+id/uidTextView" />
 
     <TextView
         android:id="@+id/usernameTextView"
@@ -125,7 +125,7 @@
         android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/button_border"
         android:clickable="true"
         android:focusable="true"
@@ -134,14 +134,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameValueTextView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/uidValueTextView" />
 
     <Button
         android:id="@+id/saveProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/button_border"
         android:clickable="true"
         android:focusable="true"
@@ -150,91 +149,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/uidValueTextView" />
 
     <Button
         android:id="@+id/logoutProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/button_cancel"
         android:clickable="true"
         android:focusable="true"
         android:text="logout"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toEndOf="@+id/editProfileButton"
-        app:layout_constraintTop_toBottomOf="@+id/usernameValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/uidValueTextView" />
 
     <Button
         android:id="@+id/CancelProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/button_cancel"
         android:clickable="true"
         android:focusable="true"
-        android:text="Cancel"
+        android:text="cancel"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordValueTextView" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toEndOf="@+id/saveProfileButton"
+        app:layout_constraintTop_toBottomOf="@+id/uidValueTextView" />
 
     <EditText
         android:id="@+id/editUsernameValueTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/white"
-        android:hint="Username"
+        android:text="your name"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="18sp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/uidValueTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailValueTextView" />
+        app:layout_constraintTop_toTopOf="@+id/usernameValueTextView" />
 
-    <EditText
-        android:id="@+id/editPasswordValueTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/white"
-        android:hint="Password"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/passwordTextView"
-        app:layout_constraintTop_toBottomOf="@+id/editUsernameValueTextView" />
 
-    <EditText
-        android:id="@+id/editEmailValueTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/white"
-        android:hint="Email"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/emailTextView"
-        app:layout_constraintTop_toBottomOf="@+id/profilePictureImageView" />
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/editProfilePostRecyclerView"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"-->

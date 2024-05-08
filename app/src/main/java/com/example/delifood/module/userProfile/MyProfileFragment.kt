@@ -48,8 +48,6 @@ class MyProfileFragment(
    private var usernameValueTextView: TextView? = null
    private var emailValueTextView: TextView? = null
    private var editUsernameEditText: EditText? = null
-   private var editEmailEditText: EditText? = null
-    private var editPasswordTextView: EditText? = null
     private var passwordValueTextView: TextView? = null
    private var profilePhoto: ImageView? = null
    private var saveButton: Button? = null
@@ -136,15 +134,13 @@ class MyProfileFragment(
         usernameValueTextView = view.findViewById(R.id.usernameValueTextView)
         emailValueTextView = view.findViewById(R.id.emailValueTextView)
         editUsernameEditText = view.findViewById(R.id.editUsernameValueTextView)
-        editEmailEditText = view.findViewById(R.id.editEmailValueTextView)
         saveButton = view.findViewById(R.id.saveProfileButton)
         editButton = view.findViewById(R.id.editProfileButton)
        logoutButton = view.findViewById(R.id.logoutProfileButton)
         cancelButton = view.findViewById(R.id.CancelProfileButton)
         profilePhoto = view.findViewById(R.id.profilePictureImageView)
         editPhotoProfile = view.findViewById(R.id.btnUploadProfile)
-        passwordValueTextView = view.findViewById(R.id.passwordValueTextView)
-        editPasswordTextView = view.findViewById(R.id.editPasswordValueTextView)
+        passwordValueTextView = view.findViewById(R.id.uidValueTextView)
 
        logoutButton?.setOnClickListener {
            val fragmentManager = requireActivity().supportFragmentManager
@@ -166,15 +162,11 @@ class MyProfileFragment(
     private fun setEditingMode() {
         isEditing = true
         editUsernameEditText?.visibility = View.VISIBLE
-        editEmailEditText?.visibility = View.VISIBLE
         editPhotoProfile?.visibility = View.VISIBLE
-        editPasswordTextView?.visibility = View.VISIBLE
         saveButton?.visibility = View.VISIBLE
         cancelButton?.visibility = View.VISIBLE
         editButton?.visibility = View.GONE
         usernameValueTextView?.visibility = View.GONE
-        emailValueTextView?.visibility = View.GONE
-        passwordValueTextView?.visibility = View.GONE
         logoutButton?.visibility = View.GONE
         editPhotoProfile?.setOnClickListener() {
             selectImage()
@@ -193,14 +185,11 @@ class MyProfileFragment(
     private fun setViewMode() {
         isEditing = false
         editUsernameEditText?.visibility = View.GONE
-        editEmailEditText?.visibility = View.GONE
         editPhotoProfile?.visibility = View.GONE
         saveButton?.visibility = View.GONE
         cancelButton?.visibility = View.GONE
-        editPasswordTextView?.visibility = View.GONE
         editButton?.visibility = View.VISIBLE
         usernameValueTextView?.visibility = View.VISIBLE
-        emailValueTextView?.visibility = View.VISIBLE
         logoutButton?.visibility = View.VISIBLE
         newPhotoUri?.let {
             profilePhoto?.setImageURI(it)
@@ -218,8 +207,6 @@ class MyProfileFragment(
 
     private fun saveProfile() {
          username = editUsernameEditText?.text.toString()
-         email = editEmailEditText?.text.toString()
-        password = editPasswordTextView?.text.toString()
 
         usernameValueTextView?.text = username
         emailValueTextView?.text = email
