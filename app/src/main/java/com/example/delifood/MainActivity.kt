@@ -1,6 +1,7 @@
 package com.example.delifood
 
 
+import PostEvent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         var homeNavBtn: Button? = null
         var profileNavBtn: Button? = null
         var addPostNavBtn: Button? = null
-        var myPostsNavBtn: Button? = null
         var weatherNavBtn: Button? = null
     }
 
@@ -136,6 +136,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLoginFragment( loginFragment: LoginFragment) {
+
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 

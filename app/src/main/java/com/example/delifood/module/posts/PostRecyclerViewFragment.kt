@@ -1,19 +1,15 @@
 package com.example.delifood.module.posts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.delifood.MainActivity
 import com.example.delifood.PostState
-import com.example.delifood.data.Post
 import com.example.delifood.R
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class PostRecyclerViewFragment(
@@ -31,6 +27,10 @@ class PostRecyclerViewFragment(
         postRecyclerView.adapter = PostRecyclerViewAdapter(postState)
 
         // Other UI setup...
+        MainActivity.homeNavBtn?.visibility = View.VISIBLE
+        MainActivity.weatherNavBtn?.visibility = View.VISIBLE
+        MainActivity.profileNavBtn?.visibility = View.VISIBLE
+        MainActivity.addPostNavBtn?.visibility = View.VISIBLE
 
         return view
     }

@@ -18,6 +18,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.delifood.MainActivity
 import com.example.delifood.R
 import com.example.delifood.SessionManager
 import com.example.delifood.UserState
@@ -103,6 +104,10 @@ class MyProfileFragment(
         uidValueTextView = view.findViewById(R.id.uidValueTextView)
 
        logoutButton?.setOnClickListener {
+           MainActivity.homeNavBtn?.visibility = View.GONE
+           MainActivity.weatherNavBtn?.visibility = View.GONE
+           MainActivity.profileNavBtn?.visibility = View.GONE
+           MainActivity.addPostNavBtn?.visibility = View.GONE
            val fragmentManager = requireActivity().supportFragmentManager
            val transaction = fragmentManager.beginTransaction()
            val loginFragment = LoginFragment(state = state, onEvent = onEvent)
@@ -159,6 +164,7 @@ class MyProfileFragment(
 
 
         logoutButton?.setOnClickListener {
+
             Log.d("MyProfileFragment", "Logging out user")
             Log.d("MyProfileFragment", "Logging out user")
         }
