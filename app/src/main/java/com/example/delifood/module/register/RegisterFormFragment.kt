@@ -100,7 +100,7 @@ class RegisterFormFragment(
 
                     Log.d("RegisterFormFragment", "User registered successfully")
                     result.getOrNull()?.user?.uid?.let { uid ->
-                        val user = User(username, email, uid)
+                        val user = User(username, email, uid,"")
                         onEvent(UserEvent.Register(user))
 
                         transaction.replace(R.id.fcvMainActivity, homeFragment)

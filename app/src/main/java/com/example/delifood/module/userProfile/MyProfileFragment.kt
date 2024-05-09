@@ -177,7 +177,8 @@ class MyProfileFragment(
         emailValueTextView?.text = email
         uidValueTextView?.text = uid
 
-        onEvent(UserEvent.Update(User(username = username!!, email = email!!, uid = uid!!)))
+        onEvent(UserEvent.Update(User(username = username!!, email = email!!, uid = uid!!, profilePhoto = "sadsad"))
+        )
 
     }
 

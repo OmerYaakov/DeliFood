@@ -6,5 +6,7 @@ import androidx.room.PrimaryKey
 data class Post(
     val title: String?,
     val uid: String?,
+    val content: String?,
+    val imageUrl: String?,
     @PrimaryKey(autoGenerate = true) val id: Int = 0
 )

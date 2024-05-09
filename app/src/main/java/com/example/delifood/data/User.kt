@@ -10,6 +10,7 @@ data class User(
     val username: String,
     val email: String,
     val uid : String,
+    val profilePhoto: String,
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0

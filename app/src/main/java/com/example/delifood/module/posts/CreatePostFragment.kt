@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.example.delifood.FileHandler
 import com.example.delifood.PostState
 import com.example.delifood.R
 import com.example.delifood.data.Post
@@ -35,6 +36,7 @@ class CreatePostFragment(
     private var submitPostButton: Button? = null
     private var postTitle: EditText? = null
     private var postContent: EditText? = null
+    private  val fileHandler = FileHandler()
 
 
 
@@ -66,9 +68,7 @@ class CreatePostFragment(
             val photo = selectedPhotoUri
 
 
-
-
-            onEvent(PostEvent.CreatePost(Post(title, "12344")))
+            onEvent(PostEvent.CreatePost(Post(title,"123",description,"/storage/emulated/0/Android/data/com.example.delifood/files/Pictures/my_image.png")))
 
             // TODO: Implement logic to upload the post with title, content, and photo
 
@@ -107,6 +107,7 @@ class CreatePostFragment(
         startActivityForResult(intent, REQUEST_PICK_IMAGE)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -115,11 +116,18 @@ class CreatePostFragment(
                 REQUEST_PICK_IMAGE -> {
                     selectedPhotoUri = data?.data
                     photoPreview?.setImageURI(selectedPhotoUri)
+                    selectedPhotoUri?.let { uri ->
+                        // Load the image from the URI
+                        val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                        // Save the image to internal storage
+                        fileHandler.saveImageToExternalStorage(requireContext(), bitmap, "my_image.png")
+                    }
                 }
                 REQUEST_TAKE_PHOTO -> {
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    // Convert Bitmap to URI
-                    selectedPhotoUri = getImageUri(requireContext(), imageBitmap)
+                    // Save the image to internal storage
+                    fileHandler.saveImageToExternalStorage(requireContext(), imageBitmap, "my_image.png")
+                    // Display the image in the ImageView
                     photoPreview?.setImageBitmap(imageBitmap)
                 }
             }
