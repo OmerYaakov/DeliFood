@@ -68,7 +68,7 @@ class CreatePostFragment(
             val photo = selectedPhotoUri
 
 
-            onEvent(PostEvent.CreatePost(Post(title,"123",description,"/storage/emulated/0/Android/data/com.example.delifood/files/Pictures/my_image.png")))
+            onEvent(PostEvent.CreatePost(Post(title,"123",description,"/storage/emulated/0/Android/data/com.example.delifood/files/Pictures/${title}.png")))
 
             // TODO: Implement logic to upload the post with title, content, and photo
 
@@ -120,13 +120,13 @@ class CreatePostFragment(
                         // Load the image from the URI
                         val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
                         // Save the image to internal storage
-                        fileHandler.saveImageToExternalStorage(requireContext(), bitmap, "my_image.png")
+                        fileHandler.saveImageToExternalStorage(requireContext(), bitmap,postTitle?.text.toString()+".png")
                     }
                 }
                 REQUEST_TAKE_PHOTO -> {
                     val imageBitmap = data?.extras?.get("data") as Bitmap
                     // Save the image to internal storage
-                    fileHandler.saveImageToExternalStorage(requireContext(), imageBitmap, "my_image.png")
+                    fileHandler.saveImageToExternalStorage(requireContext(), imageBitmap, postTitle?.text.toString()+".png")
                     // Display the image in the ImageView
                     photoPreview?.setImageBitmap(imageBitmap)
                 }
