@@ -50,7 +50,7 @@ class CreatePostFragment(
         val view = inflater.inflate(R.layout.fragment_create_post, container, false)
         selectPhotoButton = view.findViewById(R.id.select_photo_button)
         submitPostButton = view.findViewById(R.id.submit_post_button)
-        postTitle = view.findViewById(R.id.post_title)
+        postTitle = view.findViewById(R.id.post_publisher)
         postContent = view.findViewById(R.id.post_content)
         photoPreview = view.findViewById(R.id.photo_preview)
         return view
