@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import com.example.delifood.FileHandler
 import com.example.delifood.PostState
 import com.example.delifood.R
+import com.example.delifood.SessionManager
 import com.example.delifood.data.Post
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.ByteArrayOutputStream
@@ -68,7 +69,7 @@ class CreatePostFragment(
             val photo = selectedPhotoUri
 
 
-            onEvent(PostEvent.CreatePost(Post(title,"123",description,"/storage/emulated/0/Android/data/com.example.delifood/files/Pictures/${title}.png")))
+            onEvent(PostEvent.CreatePost(Post(title,SessionManager.getUserId(),description,"/storage/emulated/0/Android/data/com.example.delifood/files/Pictures/${title}.png")))
 
             // TODO: Implement logic to upload the post with title, content, and photo
 

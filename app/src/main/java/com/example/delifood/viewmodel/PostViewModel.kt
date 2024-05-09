@@ -52,7 +52,7 @@ class PostViewModel(
             is PostEvent.SetMyPosts -> {
                 viewModelScope.launch {
                     SessionManager.getUserId().let { it ->
-                        dao.getPostByUid("123").collect {itPost->
+                        dao.getPostByUid(it).collect {itPost->
                             state.update { it.copy(posts = itPost) }
                         }
                     }

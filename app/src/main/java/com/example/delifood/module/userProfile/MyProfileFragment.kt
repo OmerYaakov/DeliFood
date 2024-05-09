@@ -29,6 +29,10 @@ import com.example.delifood.module.login.LoginFragment
 import com.example.delifood.viewmodel.UserEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.ByteArrayOutputStream
+import java.io.File
+import com.squareup.picasso.Picasso
+
+
 
 
 class MyProfileFragment(
@@ -102,6 +106,9 @@ class MyProfileFragment(
         profilePhoto = view.findViewById(R.id.profilePictureImageView)
         editPhotoProfile = view.findViewById(R.id.btnUploadProfile)
         uidValueTextView = view.findViewById(R.id.uidValueTextView)
+
+        val imgFile = File(state.value.user?.profilePhoto?:"")
+        Picasso.get().load(imgFile).into(profilePhoto)
 
        logoutButton?.setOnClickListener {
            MainActivity.homeNavBtn?.visibility = View.GONE

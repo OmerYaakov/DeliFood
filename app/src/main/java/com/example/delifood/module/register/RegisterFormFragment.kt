@@ -18,6 +18,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.delifood.FileHandler
 import com.example.delifood.FirebaseAuthManager
 import com.example.delifood.PostState
 import com.example.delifood.R
@@ -34,7 +35,7 @@ class RegisterFormFragment(
     private val onPostEvent: (PostEvent) -> Unit = {}
 ) : Fragment() {
 
-    private val  firebaseAuthManager = FirebaseAuthManager()
+    private val firebaseAuthManager = FirebaseAuthManager()
 
 
     private var tvAppName: TextView? = null
@@ -46,6 +47,8 @@ class RegisterFormFragment(
     private var btnRegister: Button? = null
     private var btnCancel: Button? = null
     private var progressBar: ProgressBar? = null
+
+    private val fileHandler = FileHandler()
 
 
     private val REQUEST_IMAGE_CAPTURE = 1
@@ -89,18 +92,23 @@ class RegisterFormFragment(
 
             firebaseAuthManager.registerUser(email, password) { result ->
                 if (result.isSuccess) {
-                    etRegisterUsername?.visibility  = View.INVISIBLE
-                    etRegisterEmail?.visibility  = View.INVISIBLE
-                    etRegisterPassword?.visibility  = View.INVISIBLE
-                    btnRegister?.visibility  = View.INVISIBLE
-                    btnUploadProfile?.visibility  = View.INVISIBLE
-                    btnCancel?.visibility  = View.INVISIBLE
+                    etRegisterUsername?.visibility = View.INVISIBLE
+                    etRegisterEmail?.visibility = View.INVISIBLE
+                    etRegisterPassword?.visibility = View.INVISIBLE
+                    btnRegister?.visibility = View.INVISIBLE
+                    btnUploadProfile?.visibility = View.INVISIBLE
+                    btnCancel?.visibility = View.INVISIBLE
                     progressBar?.visibility = View.VISIBLE
 
 
                     Log.d("RegisterFormFragment", "User registered successfully")
                     result.getOrNull()?.user?.uid?.let { uid ->
-                        val user = User(username, email, uid,"")
+                        val user = User(
+                            username,
+                            email,
+                            uid,
+                            "/storage/emulated/0/Android/data/com.example.delifood/files/Pictures/${username}user.png"
+                        )
                         onEvent(UserEvent.Register(user))
 
                         transaction.replace(R.id.fcvMainActivity, homeFragment)
@@ -109,26 +117,27 @@ class RegisterFormFragment(
                     }
                 } else {
                     Log.e("RegisterFormFragment", "Failed to register user")
-                    etRegisterUsername?.visibility  = View.VISIBLE
-                    etRegisterEmail?.visibility  = View.VISIBLE
-                    etRegisterPassword?.visibility  = View.VISIBLE
-                    btnRegister?.visibility  = View.VISIBLE
-                    btnUploadProfile?.visibility  = View.VISIBLE
-                    btnCancel?.visibility  = View.VISIBLE
+                    etRegisterUsername?.visibility = View.VISIBLE
+                    etRegisterEmail?.visibility = View.VISIBLE
+                    etRegisterPassword?.visibility = View.VISIBLE
+                    btnRegister?.visibility = View.VISIBLE
+                    btnUploadProfile?.visibility = View.VISIBLE
+                    btnCancel?.visibility = View.VISIBLE
                     progressBar?.visibility = View.INVISIBLE
                 }
             }
 
         }
-            btnCancel?.setOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
-            }
+        btnCancel?.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
 
     }
 
     private fun selectImage() {
         val options = arrayOf(
-        "Take Photo", "Choose from Gallery", "Cancel")
+            "Take Photo", "Choose from Gallery", "Cancel"
+        )
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Choose your profile picture")
@@ -162,10 +171,25 @@ class RegisterFormFragment(
                 REQUEST_IMAGE_CAPTURE -> {
                     val imageBitmap = data?.extras?.get("data") as Bitmap
                     imgProfile?.setImageBitmap(imageBitmap)
+                    fileHandler.saveImageToExternalStorage(
+                        requireContext(),
+                        imageBitmap,
+                        etRegisterUsername?.text.toString() + "user.png"
+                    )
                 }
+
                 REQUEST_IMAGE_GALLERY -> {
                     val imageUri = data?.data
                     imgProfile?.setImageURI(imageUri)
+                    imageUri?.let { uri ->
+                        val bitmap =
+                            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                        fileHandler.saveImageToExternalStorage(
+                            requireContext(),
+                            bitmap,
+                            etRegisterUsername?.text.toString() + "user.png"
+                        )
+                    }
                 }
             }
         }
